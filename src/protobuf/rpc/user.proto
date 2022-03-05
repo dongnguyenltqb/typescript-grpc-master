@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package rpc;
+
+import "message/user.proto";
+
+service User{
+    rpc Login(message.Credentials) returns (message.LoginResult){};
+}

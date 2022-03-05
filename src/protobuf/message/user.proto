@@ -1,0 +1,23 @@
+syntax  = "proto3";
+
+
+package message;
+
+import "google/protobuf/timestamp.proto";
+
+
+message AccessToken{
+    string access_token = 1;
+}
+
+message Credentials{
+    string username = 1;
+    string password = 2;
+}
+
+message LoginResult{
+    required bool ok = 1;
+    optional string error = 2;
+    optional AccessToken data = 3;
+    optional google.protobuf.Timestamp login_at = 4;
+}

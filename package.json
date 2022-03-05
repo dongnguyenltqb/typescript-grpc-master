@@ -1,0 +1,31 @@
+{
+  "name": "master",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "ts-node-dev --respawn src/index.ts",
+    "build": "rm -Rf dist && npm run build:proto && tsc && cp -R src/protobuf dist/",
+    "start": "node dist/index.js",
+    "build:message": "./node_modules/.bin/proto-loader-gen-types --keepCase=true --longs=String --enums=String --defaults --oneofs --grpcLib=@grpc/grpc-js -I $PWD/src/protobuf -I $PWD/src/protobuf/message --outDir=src/proto-gen $(ls src/protobuf/message)",
+    "build:rpc": "./node_modules/.bin/proto-loader-gen-types --keepCase=true --longs=String --enums=String --defaults --oneofs --grpcLib=@grpc/grpc-js -I $PWD/src/protobuf -I $PWD/src/protobuf/rpc --outDir=src/proto-gen $(ls src/protobuf/rpc)",
+    "build:proto": "npm run build:message && npm run build:rpc"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.25",
+    "@typescript-eslint/eslint-plugin": "^4.15.0",
+    "@typescript-eslint/parser": "^4.15.0",
+    "eslint": "^7.19.0",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "nodemon": "^2.0.7",
+    "prettier": "^2.2.1",
+    "ts-node-dev": "^1.1.8"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@grpc/grpc-js": "^1.5.7",
+    "@grpc/proto-loader": "^0.6.9"
+  }
+}
