@@ -1,4 +1,4 @@
-// Original file: /Users/dong/Desktop/master/src/protobuf/message/user.proto
+// Original file: /Users/dong/Desktop/code/master/src/protobuf/message/user.proto
 
 
 export interface Credentials {

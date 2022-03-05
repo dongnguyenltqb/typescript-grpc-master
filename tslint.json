@@ -1,0 +1,17 @@
+{    
+    "defaultSeverity": "error",
+    "extends": [
+        "tslint:recommended"    
+    ],
+    "jsRules": {},    
+    "rules": {
+        "indent": [ true, "spaces" ],
+        "trailing-comma": [ false ]
+    }, 
+	"linterOptions": {
+		"exclude": [
+			"src/proto-gen/**"
+		]
+	},
+    "rulesDirectory": []
+}

@@ -6,4 +6,5 @@ import "message/user.proto";
 
 service User{
     rpc Login(message.Credentials) returns (message.LoginResult){};
+    rpc Logout(message.LogoutRequest) returns (message.LogoutResponse){};
 }

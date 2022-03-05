@@ -1,26 +1,26 @@
 import { Server, ServerCredentials } from "@grpc/grpc-js";
 
-import protoDescriptor from "../definition";
-import { postHandler } from "./post";
 import { userHandler } from "./user";
+import protoDescriptor from "../protoDescriptor";
 
-// The protoDescriptor object has the full package hierarchy
-const rpcDescriptor = protoDescriptor.rpc;
+const NewMasterServer = (addr: string) =>
+  new Promise<Server>((solved, reject) => {
+    const grpcServer: Server = new Server({});
+    // Register server handler.
+    grpcServer.addService(protoDescriptor.rpc.User.service, userHandler);
 
-const addr = "0.0.0.0:5000";
-var grpcServer: Server = new Server({});
-grpcServer.addService(rpcDescriptor.User.service, userHandler);
-grpcServer.addService(rpcDescriptor.Post.service, postHandler);
+    // Bind and listen for imcomming request.
+    grpcServer.bindAsync(
+      addr,
+      ServerCredentials.createInsecure(),
+      (err: Error | null) => {
+        if (err) {
+          reject(err);
+        }
+        grpcServer.start();
+        solved(grpcServer);
+      }
+    );
+  });
 
-
-grpcServer.bindAsync(
-  addr,
-  ServerCredentials.createInsecure(),
-  (err: Error | null, bindPort: number) => {
-    if (err) {
-      throw err;
-    }
-    console.log("Listening on port:", bindPort);
-    grpcServer.start();
-  }
-);
+export { NewMasterServer };

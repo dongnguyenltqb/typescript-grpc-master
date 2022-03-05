@@ -16,8 +16,17 @@ message Credentials{
 }
 
 message LoginResult{
-    required bool ok = 1;
+    bool ok = 1;
     optional string error = 2;
     optional AccessToken data = 3;
     optional google.protobuf.Timestamp login_at = 4;
+}
+
+message LogoutRequest {
+    AccessToken access_token = 1 ;
+}
+
+message LogoutResponse {
+    bool ok = 1;
+    optional string error = 2;
 }

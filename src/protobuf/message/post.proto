@@ -4,11 +4,11 @@ syntax  = "proto3";
 package message;
 
 message CreatePost {
-    required string title = 1;
+    string title = 1;
     optional string content = 2;
 }
 
 message CreatePostResult {
-    required bool succeed = 1;
+    bool succeed = 1;
     optional int32 id = 2;
 }

@@ -1,20 +1,9 @@
-import { ServiceError } from "@grpc/grpc-js";
-import "./server/server";
-export { newMasterClient } from "./client/client";
+import { NewMasterServer } from "./server/server";
 
-import { IMasterClient, newMasterClient } from "./client/client";
-import { LoginResult__Output } from "./proto-gen/message/LoginResult";
+async function main() {
+  const ADDR = process.env.ADDR || "localhost:5000";
+  await NewMasterServer(ADDR);
+  // console.log("Server is listening on ", ADDR);
+}
 
-const masterClient: IMasterClient = newMasterClient("localhost:5000");
-
-setTimeout(() => {
-  masterClient.UserClient.Login(
-    {
-      username: "dong",
-      password: "123",
-    },
-    (err: ServiceError, response: LoginResult__Output) => {
-      console.log({ err, response });
-    }
-  );
-}, 2000);
+main();
