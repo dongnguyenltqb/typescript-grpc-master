@@ -5,8 +5,6 @@ import { NewMasterServer } from "./server/server";
 async function main() {
   const { addr } = config;
   await NewMasterServer(addr);
-  console.log("Server is listening on :", addr);
-  require("./test");
 }
 
 main();
