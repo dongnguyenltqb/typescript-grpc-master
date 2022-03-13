@@ -1,3 +1,4 @@
+import "dotenv/config";
 import { NewMasterServer } from "./server/server";
 
 async function main() {

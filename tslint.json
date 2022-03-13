@@ -10,7 +10,8 @@
     }, 
 	"linterOptions": {
 		"exclude": [
-			"src/proto-gen/**"
+			"src/proto-gen/**",
+            "src/database/**/*.ts"
 		]
 	},
     "rulesDirectory": []
