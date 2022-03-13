@@ -1,10 +1,12 @@
 import "dotenv/config";
+import config from "./config";
 import { NewMasterServer } from "./server/server";
 
 async function main() {
-  const ADDR = process.env.ADDR || "localhost:5000";
-  await NewMasterServer(ADDR);
-  // console.log("Server is listening on ", ADDR);
+  const { addr } = config;
+  await NewMasterServer(addr);
+  console.log("Server is listening on :", addr);
+  require("./test");
 }
 
 main();

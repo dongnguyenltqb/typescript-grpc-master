@@ -1,37 +1,51 @@
-import { sendUnaryData, Server, ServerUnaryCall } from "@grpc/grpc-js";
+import { ServerUnaryCall } from "@grpc/grpc-js";
+import { wrapper } from "./wraper";
+
+import { UserModel } from "../models/users";
 import { Credentials } from "../proto-gen/message/Credentials";
-import { LoginResult } from "../proto-gen/message/LoginResult";
+import { LoginResponse } from "../proto-gen/message/LoginResponse";
 import { LogoutRequest } from "../proto-gen/message/LogoutRequest";
 import { LogoutResponse } from "../proto-gen/message/LogoutResponse";
+import { SignUpRequest } from "../proto-gen/message/SignUpRequest";
+import { SignUpResponse } from "../proto-gen/message/SignUpResponse";
 import { UserHandlers } from "../proto-gen/rpc/User";
 
+async function SignUp(
+  call: ServerUnaryCall<SignUpRequest, SignUpResponse>
+): Promise<SignUpResponse> {
+  const { username, password } = call.request;
+  const user = await UserModel.getUserByUsername(username);
+  if (user) throw new Error("User with username was existed.");
+  const response = await UserModel.create({ username, password });
+  return {
+    user: response,
+  };
+}
+
+async function Login(
+  call: ServerUnaryCall<Credentials, LoginResponse>
+): Promise<LoginResponse> {
+  return {
+    ok: true,
+    error: null,
+    data: {
+      access_token: "herer is access token",
+    },
+  };
+}
+
+async function Logout(
+  call: ServerUnaryCall<LogoutRequest, LogoutResponse>
+): Promise<LogoutResponse> {
+  return {
+    ok: true,
+  };
+}
+
 const userHandler: UserHandlers = {
-  Login(
-    call: ServerUnaryCall<Credentials, LoginResult>,
-    callback: sendUnaryData<LoginResult>
-  ) {
-    try {
-      // console.log(call.request.username, call.request.password);
-      callback(null, {
-        ok: true,
-        error: null,
-        data: {
-          access_token: "herer is access token",
-        },
-      });
-    } catch (error) {
-      callback(error);
-    }
-  },
-  Logout(
-    call: ServerUnaryCall<LogoutRequest, LoginResult>,
-    callback: sendUnaryData<LogoutResponse>
-  ) {
-    // console.log(call.request.access_token);
-    callback(null, {
-      ok: true,
-    });
-  },
+  SignUp: wrapper(SignUp),
+  Login: wrapper(Login),
+  Logout: wrapper(Logout),
 };
 
 export { userHandler };

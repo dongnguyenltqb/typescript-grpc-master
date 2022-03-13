@@ -5,6 +5,21 @@ package message;
 
 import "google/protobuf/timestamp.proto";
 
+message User {
+    uint32 id =1;
+    // username is email
+    string username =2;
+    string password =3;
+}
+
+message SignUpRequest {
+    string username =1;
+    string password=2;
+}
+
+message SignUpResponse {
+    User user = 1;
+}
 
 message AccessToken{
     string access_token = 1;
@@ -15,7 +30,7 @@ message Credentials{
     string password = 2;
 }
 
-message LoginResult{
+message LoginResponse{
     bool ok = 1;
     optional string error = 2;
     optional AccessToken data = 3;

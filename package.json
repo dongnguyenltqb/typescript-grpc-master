@@ -11,7 +11,7 @@
     "start": "node dist/src/index.js",
     "build:proto:message": "./node_modules/.bin/proto-loader-gen-types --keepCase=true --longs=String --enums=String --defaults --oneofs --grpcLib=@grpc/grpc-js -I $PWD/src/protobuf -I $PWD/src/protobuf/message --outDir=src/proto-gen $(ls src/protobuf/message)",
     "build:proto:rpc": "./node_modules/.bin/proto-loader-gen-types --keepCase=true --longs=String --enums=String --defaults --oneofs --grpcLib=@grpc/grpc-js -I $PWD/src/protobuf -I $PWD/src/protobuf/rpc --outDir=src/proto-gen $(ls src/protobuf/rpc)",
-    "build:proto": "npm run build:proto:message && npm run build:proto:rpc",
+    "build:proto": "rm -R src/proto-gen && npm run build:proto:message && npm run build:proto:rpc",
     "release": "npm run build && npm publish",
     "db:migrate:new": "knex migrate:make -x ts",
     "db:migrate:latest": "knex migrate:latest"

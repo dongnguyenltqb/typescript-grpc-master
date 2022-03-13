@@ -16,9 +16,12 @@ export interface ProtoGrpcType {
   message: {
     AccessToken: MessageTypeDefinition
     Credentials: MessageTypeDefinition
-    LoginResult: MessageTypeDefinition
+    LoginResponse: MessageTypeDefinition
     LogoutRequest: MessageTypeDefinition
     LogoutResponse: MessageTypeDefinition
+    SignUpRequest: MessageTypeDefinition
+    SignUpResponse: MessageTypeDefinition
+    User: MessageTypeDefinition
   }
   rpc: {
     User: SubtypeConstructor<typeof grpc.Client, _rpc_UserClient> & { service: _rpc_UserDefinition }

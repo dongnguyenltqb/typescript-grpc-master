@@ -10,8 +10,8 @@ const config: { [key: string]: Knex.Config } = {
       database: "learn",
     },
     pool: {
-      min: 2,
-      max: 10,
+      min: 1,
+      max: 1,
     },
     migrations: {
       tableName: "knex_migrations",

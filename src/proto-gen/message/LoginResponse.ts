@@ -3,7 +3,7 @@
 import type { AccessToken as _message_AccessToken, AccessToken__Output as _message_AccessToken__Output } from '../message/AccessToken';
 import type { Timestamp as _google_protobuf_Timestamp, Timestamp__Output as _google_protobuf_Timestamp__Output } from '../google/protobuf/Timestamp';
 
-export interface LoginResult {
+export interface LoginResponse {
   'ok'?: (boolean);
   'error'?: (string);
   'data'?: (_message_AccessToken | null);
@@ -13,7 +13,7 @@ export interface LoginResult {
   '_login_at'?: "login_at";
 }
 
-export interface LoginResult__Output {
+export interface LoginResponse__Output {
   'ok': (boolean);
   'error'?: (string);
   'data'?: (_message_AccessToken__Output | null);
