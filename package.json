@@ -1,6 +1,6 @@
 {
   "name": "@dong/master",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "types": "dist/src/index.d.ts",
   "description": "",
   "main": "dist/src/index.js",
