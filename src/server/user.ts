@@ -25,11 +25,15 @@ async function SignUp(
 async function Login(
   call: ServerUnaryCall<Credentials, LoginResponse>
 ): Promise<LoginResponse> {
+  const { username, password } = call.request;
+  const user = await UserModel.getUserByUsername(username);
+  if (!user) throw new Error("User not found.");
+  if (user.password !== password) throw new Error("The password is wroong");
   return {
     ok: true,
     error: null,
     data: {
-      access_token: "herer is access token",
+      access_token: `token: ${username}`,
     },
   };
 }
