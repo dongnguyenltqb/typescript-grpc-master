@@ -13,8 +13,8 @@ message User {
 }
 
 message SignUpRequest {
-    string username =1;
-    string password=2;
+    string username = 1;
+    string password = 2;
 }
 
 message SignUpResponse {

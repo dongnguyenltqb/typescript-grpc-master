@@ -9,4 +9,8 @@ const knex = Knex({
   },
 });
 
+export function ping() {
+  return knex.raw(`SELECT 1`).timeout(1000);
+}
+
 export default knex;
