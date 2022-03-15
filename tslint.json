@@ -1,18 +1,13 @@
-{    
-    "defaultSeverity": "error",
-    "extends": [
-        "tslint:recommended"    
-    ],
-    "jsRules": {},    
-    "rules": {
-        "indent": [ true, "spaces" ],
-        "trailing-comma": [ false ]
-    }, 
-	"linterOptions": {
-		"exclude": [
-			"src/proto-gen/**",
-            "src/database/**/*.ts"
-		]
-	},
-    "rulesDirectory": []
+{
+  "defaultSeverity": "warning",
+  "extends": ["tslint:recommended"],
+  "jsRules": {},
+  "rules": {
+    "indent": [true, "spaces"],
+    "trailing-comma": [false]
+  },
+  "linterOptions": {
+    "exclude": ["src/proto-gen/**", "src/database/**/*.ts"]
+  },
+  "rulesDirectory": []
 }

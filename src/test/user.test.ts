@@ -17,12 +17,15 @@ describe("user.test.ts", async function () {
     await ping();
     await NewMasterServer(addr);
     client = NewMasterClient(addr);
+    console.log("Created server/client");
   });
 
-  this.afterAll(function () {});
+  this.afterAll(function (done) {
+    done();
+  });
 
   describe("singup", function () {
-    it("should signup successfully", function () {
+    it("should signup successfully", function (done) {
       client.UserClient.SignUp(
         {
           username: Math.random().toString().slice(2, 13) + "@example.com",
@@ -31,19 +34,20 @@ describe("user.test.ts", async function () {
         (err: ServiceError, response: SignUpResponse) => {
           expect(err, "Error must be null").to.be.equal(null);
           expect(response.user.id, "Response a valid user id").to.gt(0);
+          done();
         }
       );
     });
 
-    it("should signup fail", function () {
+    it("should signup fail", function (done) {
       client.UserClient.SignUp(
         {
           // username: "asds",
           password: "here is the password",
         },
-        (err: ServiceError, response: SignUpResponse) => {
-          console.log({ err });
+        (err: ServiceError, _: SignUpResponse) => {
           expect(err).to.not.equal(null, "must have response error");
+          done();
         }
       );
     });
