@@ -1,4 +1,4 @@
-// Original file: /Users/dong/Desktop/code/master/src/protobuf/rpc/post.proto
+// Original file: /home/dong/code/typescript-grpc-master/src/protobuf/rpc/post.proto
 
 import type * as grpc from '@grpc/grpc-js'
 import type { MethodDefinition } from '@grpc/proto-loader'

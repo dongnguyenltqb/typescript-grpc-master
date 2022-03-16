@@ -1,10 +1,11 @@
 {
-  "defaultSeverity": "warning",
+  "defaultSeverity": "error",
   "extends": ["tslint:recommended"],
   "jsRules": {},
   "rules": {
     "indent": [true, "spaces"],
-    "trailing-comma": [false]
+    "trailing-comma": [false],
+    "only-arrow-functions": false
   },
   "linterOptions": {
     "exclude": ["src/proto-gen/**", "src/database/**/*.ts"]

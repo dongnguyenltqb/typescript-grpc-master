@@ -1,4 +1,4 @@
-// Original file: /Users/dong/Desktop/code/master/src/protobuf/message/user.proto
+// Original file: /home/dong/code/typescript-grpc-master/src/protobuf/message/user.proto
 
 
 export interface Credentials {
