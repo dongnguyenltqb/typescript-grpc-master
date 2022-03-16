@@ -6,7 +6,7 @@
   "main": "dist/src/index.js",
   "scripts": {
     "lint": "tslint -c tslint.json -p tsconfig.json",
-    "test": "ts-mocha --parallel -p tsconfig.json src/test/*.test.ts",
+    "test": "ts-mocha --parallel -p tsconfig.json src/test/*.test.ts -r dotenv/config",
     "dev": "ts-node-dev --notify --respawn src/index.ts ",
     "build": "npm run lint && rm -Rf dist && npm run build:proto && tsc && cp -R src/protobuf dist/src/",
     "start": "node dist/src/index.js",

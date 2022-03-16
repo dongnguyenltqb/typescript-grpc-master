@@ -15,8 +15,10 @@ async function SignUp(
 ): Promise<SignUpResponse> {
   const { username, password } = call.request;
   if (!username || !password) throw new Error("Invalid data.");
+
   const user = await UserModel.getUserByUsername(username);
   if (user) throw new Error("User with username was existed.");
+
   const response = await UserModel.create({ username, password });
   return {
     user: response,

@@ -1,12 +1,14 @@
 import "dotenv/config";
 import config from "./config";
 import { ping } from "./models";
-import { NewMasterServer } from "./server/server";
+import Master from "./server/server";
 
 async function main() {
   await ping();
+  console.log("connected to database");
   const { addr } = config;
-  await NewMasterServer(addr);
+  const server = new Master();
+  await server.bind(addr);
 }
 
 main();

@@ -17,4 +17,21 @@ function NewMasterClient(addr: string): IMasterClient {
   };
 }
 
-export { NewMasterClient, IMasterClient };
+type CallerFn = Function;
+
+const callWrapper = <T, R>(
+  fn: CallerFn,
+  message: T
+): Promise<R | grpc.ServiceError> => {
+  return new Promise((resolved) => {
+    fn(message, (err: grpc.ServiceError, response: R) => {
+      if (err) {
+        resolved(err);
+      } else {
+        resolved(response);
+      }
+    });
+  });
+};
+
+export { NewMasterClient, IMasterClient, callWrapper };

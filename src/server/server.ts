@@ -4,25 +4,33 @@ import { userHandler } from "./user";
 import protoDescriptor from "../protoDescriptor";
 import { postHandler } from "./post";
 
-const NewMasterServer = (addr: string) =>
-  new Promise<Server>((solved, reject) => {
-    const grpcServer: Server = new Server({});
-    // Register server handler.
-    grpcServer.addService(protoDescriptor.rpc.User.service, userHandler);
-    grpcServer.addService(protoDescriptor.rpc.Post.service, postHandler);
-
-    // Bind and listen for imcomming request.
-    grpcServer.bindAsync(
-      addr,
-      ServerCredentials.createInsecure(),
-      (err: Error | null) => {
-        if (err) {
-          reject(err);
+class Master {
+  private instance: Server;
+  constructor() {
+    this.instance = new Server({});
+    this.register();
+  }
+  private register() {
+    this.instance.addService(protoDescriptor.rpc.User.service, userHandler);
+    this.instance.addService(protoDescriptor.rpc.Post.service, postHandler);
+  }
+  public bind(addr: string): Promise<void> {
+    console.log("starting server");
+    return new Promise((solved, rejected) => {
+      this.instance.bindAsync(
+        addr,
+        ServerCredentials.createInsecure(),
+        (err: Error | null) => {
+          if (err) {
+            rejected(err);
+          }
+          this.instance.start();
+          console.log("started the server", addr);
+          solved();
         }
-        grpcServer.start();
-        solved(grpcServer);
-      }
-    );
-  });
+      );
+    });
+  }
+}
 
-export { NewMasterServer };
+export default Master;
